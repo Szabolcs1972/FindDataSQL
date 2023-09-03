@@ -23,7 +23,7 @@
   $success = 0;
 
   if (isset($_POST['question'])) {
-    $question = $_POST['question'];
+    $question = htmlspecialchars($_POST['question']);
   }
 
   if (isset($_POST['user']) && $_POST['user'] !=="") {
@@ -97,7 +97,7 @@
             //print_r($search);
             //print "<br>";
 
-            foreach ($search as $row => $value) {
+            foreach ($search as $searchrow => $value) {
               //print_r($value);
               if (array_search($question, $value)) {
                 $hit = 1;
@@ -126,6 +126,7 @@
           print "<h1>Failed!</h1>";
           print "<p>The data: <strong>" . $question . "</strong> is not in the database!</p>";
         }
+        $connection ->close();
         //print_r($columns);
 
 
